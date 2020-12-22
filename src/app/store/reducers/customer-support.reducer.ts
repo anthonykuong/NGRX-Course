@@ -13,7 +13,7 @@ export const initialState: State = {
   isSentSuccess: null,
 };
 
-export const reducer = createReducer(
+export const custReducer = createReducer(
   initialState,
   on(fromSupportActions.sendingCustomerSupportMessage, (state, action) => {
     return {
@@ -35,3 +35,8 @@ export const reducer = createReducer(
     };
   })
 );
+
+
+export function reducer(state: State | undefined, action: Action) {
+  return custReducer(state, action);
+}

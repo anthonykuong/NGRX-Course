@@ -3,6 +3,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as ProductActions from './product.actions';
 import { Product, Pagination } from '../resources/product';
+import {custReducer} from '../../../store/reducers/customer-support.reducer';
 
 export const productsFeatureKey = 'products';
 
@@ -23,7 +24,7 @@ export const initialState: State = adapter.getInitialState({
   error: null,
 });
 
-export const reducer = createReducer(
+export const prodReducer = createReducer(
   initialState,
   on(ProductActions.loadProductsSuccess, (state, action) =>
     adapter.setAll(action.paginatedResult.result, {
@@ -59,6 +60,10 @@ export const reducer = createReducer(
     }
   )
 );
+
+export function reducer(state: State | undefined, action: Action) {
+  return prodReducer(state, action);
+}
 
 export const {
   selectIds,

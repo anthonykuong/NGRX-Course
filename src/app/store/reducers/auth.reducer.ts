@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as AuthActions from '../actions/auth.actions';
 import { User } from 'src/app/modules/auth/resources/auth';
+import {custReducer} from './customer-support.reducer';
 
 export const authFeatureKey = 'auth';
 
@@ -19,7 +20,7 @@ export const initialState: State = {
   error: null,
 };
 
-export const reducer = createReducer(
+export const authReducer = createReducer(
   initialState,
 
   on(AuthActions.loginSuccess, AuthActions.browserReload, (state, action) => {
@@ -54,3 +55,7 @@ export const reducer = createReducer(
     };
   })
 );
+
+export function reducer(state: State | undefined, action: Action) {
+  return authReducer(state, action);
+}
